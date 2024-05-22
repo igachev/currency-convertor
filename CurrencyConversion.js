@@ -29,7 +29,7 @@ function currencyConversion() {
             }
 
             // if END is typed close program
-            if (selectedAmount === 'END') {
+            if (selectedAmount.toLowerCase() === 'end') {
                 return rl.close()
             }
 
@@ -43,7 +43,7 @@ function currencyConversion() {
             // go to second questions if everything is ok
             rl.question("", function (selectedBaseCurrency) {
 
-                if (selectedBaseCurrency === 'END') {
+                if (selectedBaseCurrency.toLowerCase() === 'end') {
                     return rl.close()
                 }
 
@@ -58,7 +58,7 @@ function currencyConversion() {
                             // go to third question if everything is ok
                             rl.question("", function (selectedTargetCurrency) {
 
-                                if (selectedTargetCurrency === 'END') {
+                                if (selectedTargetCurrency.toLowerCase() === 'end') {
                                     return rl.close()
                                 }
 
