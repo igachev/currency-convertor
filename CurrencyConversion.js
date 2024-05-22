@@ -1,6 +1,7 @@
 
 const config = require("./config.json")
 let readline = require('readline')
+fs = require('fs');
 const apiKey = config.api_key
 
 function currencyConversion() {
@@ -33,12 +34,29 @@ function currencyConversion() {
                         let calculation = amount * currentExchangeRate
                         let result = `${amount} ${baseCurrency} is ${calculation.toFixed(2)} ${targetCurrency}`
                         console.log(result)
-                    })
-                    
+                        let toJson = {result: result}
+
+                        fs.readFile("conversions.json", (err, data) => {
+                            let json = [];
+                            if (!err && data.length > 0) {
+                                try {
+                                    json = JSON.parse(data);
+                                } catch (e) {
+                                    console.log("Error parsing JSON, starting with an empty array");
+                                }
+                            }
+                            json.push(toJson);
+                            fs.writeFile("conversions.json", JSON.stringify(json, null, 2), (err) => {
+                                if (err) {
+                                    console.log(err);
+                                }
+                            })
+                        });
+
+                    }) 
                     })
             })
-            
-                
+                    
         })
      
 
