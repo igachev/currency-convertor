@@ -11,18 +11,35 @@ function currencyConversion() {
     let targetCurrency = "";
 
     let rl = readline.createInterface(process.stdin,process.stdout)
+
+    
     
     let enterData = function() {
 
         rl.question("",function(selectedAmount) {
+
+            if(selectedAmount === 'END') {
+               return rl.close()
+            }
+
             amount = selectedAmount
             console.log("amount:" + selectedAmount)
 
             rl.question("",function(selectedBaseCurrency) {
+
+                if(selectedBaseCurrency === 'END') {
+                   return rl.close()
+                }
+
                 baseCurrency = selectedBaseCurrency.toUpperCase()
                 console.log("base currency:" + selectedBaseCurrency)
 
                 rl.question("",function(selectedTargetCurrency) {
+
+                    if(selectedTargetCurrency === 'END') {
+                       return rl.close()
+                    }
+
                     targetCurrency = selectedTargetCurrency.toUpperCase()
                     console.log("target currency:" + selectedTargetCurrency)
 
@@ -54,7 +71,9 @@ function currencyConversion() {
                         });
 
                     }) 
-                    })
+
+                    enterData()
+                    });
             })
                     
         })
@@ -63,8 +82,7 @@ function currencyConversion() {
    
     }
     
-    enterData()
-   
+   enterData()
 
    
 }
